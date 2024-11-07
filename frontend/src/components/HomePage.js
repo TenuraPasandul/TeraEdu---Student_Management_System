@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import Carousel from 'react-bootstrap/Carousel';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
@@ -13,9 +14,10 @@ import ProgressBar from 'react-bootstrap/ProgressBar';
 import '../css/style.css';
 import PageFooter from './PageFooter';
 
-
 function HomePage() {
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [course, setCourse] = useState([]);
+  const [visibleCourses, setVisibleCourses] = useState(9); 
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,15 +28,29 @@ function HomePage() {
       setScrollProgress(scrolled);
     };
 
+    fetchData();
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get('http://localhost:8000/course');         
+      setCourse(response.data.existingPosts);
+    } catch (error) {
+      console.error('Error fetching courses:', error.message);
+    }
+  };
+
+  const loadMoreCourses = () => {
+    setVisibleCourses((prev) => prev + 9); 
+  };
 
   return (
     <div>
       <NavbarCompo />
       <br/><br/>
-      {/* Scroll Progress Bar */}
+      
       <ProgressBar 
         now={scrollProgress} 
         variant="info"
@@ -89,14 +105,14 @@ function HomePage() {
         </Carousel.Item>
       </Carousel>
 
-    <div style={{height:'30px'}}></div>
-    <Form inline style={{width:'30%',paddingBottom:'30px'}}>
+      <div style={{height:'30px'}}></div>
+      <Form inline style={{width:'30%', paddingBottom:'30px'}}>
         <Row>
           <Col xs="auto">
             <Form.Control
               type="text"
               placeholder="Search"
-              className=" mr-sm-2"
+              className="mr-sm-2"
             />
           </Col>
           <Col xs="auto">
@@ -104,21 +120,34 @@ function HomePage() {
           </Col>
         </Row>
       </Form>
-    <Card style={{ width: '18rem' }} >
-      <Card.Img variant="top" src={img1} />
-      <Card.Body>
-        <Card.Title>Introduction To Software Engineering</Card.Title>
-        <Card.Text>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </Card.Text>
-        <Button variant="primary">Enroll Course</Button>
-      </Card.Body>
-    </Card>
 
-    <PageFooter/>
+      <div style={{alignItems:'center',justifyContent:'center'}}>
+      <Row style={{width:'100%'}}>
+        {course.slice(0, visibleCourses).map((item, index) => (
+          <Col key={index} md={4} className="mb-4">
+            <Card style={{ width: '100%' }}>
+              <Card.Img variant="top" src={img1} />
+              <Card.Body>
+                <Card.Title>{item.coursename || "Course Title"}</Card.Title>
+                <Card.Text>
+                  {item.description || " "}
+                </Card.Text>
+                <Button variant="primary">Enroll Course</Button>
+              </Card.Body>
+            </Card>
+          </Col>
+        ))}
+      </Row>
+      </div>
+
+      {visibleCourses < course.length && (
+        <div className="text-center my-4">
+          <Button onClick={loadMoreCourses}>Load More</Button>
+        </div>
+      )}
+
+      <PageFooter />
     </div>
-
   );
 }
 

@@ -1,4 +1,3 @@
-// Collapsed.js
 import React, { useState } from 'react';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Accordion from 'react-bootstrap/Accordion';
