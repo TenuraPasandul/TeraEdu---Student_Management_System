@@ -1,38 +1,39 @@
 const mongoose=require('mongoose');
 
-const userSchema=new mongoose.Schema({
-    fname:{
+const courseSchema=new mongoose.Schema({
+    coursename:{
         type:String,
         required:true
     },
-    lname:{
+    category:{
         type:String,
         required:true
     },
-    gender:{
+    maintitle:{
         type:String,
         required:true
     },
-    email:{
+    subtitle:{
         type:String,
         required:true
     },
-    pass:{
+    videolink:{
+        type:String,
+        required:false
+    },
+    teachername:{
         type:String,
         required:true
     },
-    role:{
-        type:String,
-        required:true 
-    },
-    qualifications:{
+    teacherid:{
         type:String,
         required:true
     },
-    profilepic: {
-        type: String, 
-        required: true
-    }
+    studentid:{
+        type:Array,
+        required:false
+    },
+
 });
 
-module.exports=mongoose.model('users',userSchema);
+module.exports=mongoose.model('courses',courseSchema);
