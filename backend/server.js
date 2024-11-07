@@ -5,20 +5,27 @@ const cors=require('cors');
 
 const app=express();
 
+
+
 const userRoutes=require('./routes/user');
+const courseRoutes=require('./routes/course');
+
+
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors()); 
 
 app.use(userRoutes);
+app.use(courseRoutes);
 
 const PORT=8000;
-const DB_URL='mongodb+srv://tenurapasandul2000:rthAdhJ9EclaDxRF@cluster0.sfymm.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+const DB_URL='mongodb+srv://TenuraPasandul:oUwQeJr0ibD2vJAS@teraedu.gyw54.mongodb.net/?retryWrites=true&w=majority&appName=TeraEdu';
 
 mongoose.connect(DB_URL)
 .then(()=>{
     console.log('DB connected');
 })
 .catch((err)=>console.log('DB connection error',err));
+
 
 app.listen(PORT, ()=>{
     console.log(`App is running on ${PORT}`);
