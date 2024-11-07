@@ -9,13 +9,14 @@ const app=express();
 
 const userRoutes=require('./routes/user');
 const courseRoutes=require('./routes/course');
-
+const courseContentRoutes=require('./routes/courseContent');
 
 app.use(bodyParser.json());
 app.use(cors()); 
 
 app.use(userRoutes);
 app.use(courseRoutes);
+app.use(courseContentRoutes);
 
 const PORT=8000;
 const DB_URL='mongodb+srv://TenuraPasandul:oUwQeJr0ibD2vJAS@teraedu.gyw54.mongodb.net/?retryWrites=true&w=majority&appName=TeraEdu';

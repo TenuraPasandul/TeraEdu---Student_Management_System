@@ -19,31 +19,34 @@ const upload = multer({ storage });
 
 // Save post 
 router.post('/users/save', upload.fields([{ name: 'profilepic', maxCount: 1 }]), async (req, res) => {
-  try {
-    const { fname, lname, gender, email, pass, role, qualifications } = req.body;
-    const profilepic = req.files['profilepic'] ? `/uploads/${req.files['profilepic'][0].filename}` : null;
-
-    const newPost = new Posts({
-      fname,
-      lname,
-      gender,
-      email,
-      pass,
-      role,
-      qualifications,
-      profilepic: profilepic,
-    });
-
-    await newPost.save();
-    return res.status(200).json({
-      success: "Post saved successfully"
-    });
-  } catch (err) {
-    return res.status(400).json({
-      error: err.message
-    });
-  }
-});
+    console.log("Files:", req.files);
+    console.log("Body:", req.body);
+    try {
+      const { fname, lname, gender, email, pass, role, qualifications } = req.body;
+      const profilepic = req.files['profilepic'] ? `/uploads/${req.files['profilepic'][0].filename}` : null;
+  
+      const newPost = new Posts({
+        fname,
+        lname,
+        gender,
+        email,
+        pass,
+        role,
+        qualifications,
+        profilepic: profilepic,
+      });
+  
+      await newPost.save();
+      return res.status(200).json({
+        success: "Post saved successfully"
+      });
+    } catch (err) {
+      return res.status(400).json({
+        error: err.message
+      });
+    }
+  });
+  
 
 router.get('/users', async (req, res) => {
     try {

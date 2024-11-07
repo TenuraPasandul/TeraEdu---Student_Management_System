@@ -1,9 +1,9 @@
 const express = require('express');
-const Posts = require('../models/course');
+const Posts = require('../models/coursecontent');
 
 const router = express.Router();
 
-router.post('/course/save', async (req, res) => {
+router.post('/coursecontent/save', async (req, res) => {
     try {
         const newPost = new Posts(req.body);
         await newPost.save();
@@ -17,7 +17,7 @@ router.post('/course/save', async (req, res) => {
     }
 });
 
-router.get('/course', async (req, res) => {
+router.get('/coursecontent', async (req, res) => {
     try {
         const posts = await Posts.find().exec();
         return res.status(200).json({
@@ -31,12 +31,12 @@ router.get('/course', async (req, res) => {
     }
 });
 
-router.put('/course/update/:id', async (req, res) => {
+router.put('/coursecontent/update/:id', async (req, res) => {
     try {
       const updatedPost = await Posts.findByIdAndUpdate(
         req.params.id,
         { $set: req.body },
-        { new: true } // To return the updated document
+        { new: true } 
       );
   
       if (!updatedPost) {
@@ -57,7 +57,7 @@ router.put('/course/update/:id', async (req, res) => {
     }
   });
 
-  router.delete('/course/delete/:id', async (req, res) => {
+  router.delete('/coursecontent/delete/:id', async (req, res) => {
     try {
         const deletedPost = await Posts.findByIdAndDelete(req.params.id).exec();
         

@@ -1,31 +1,26 @@
 const mongoose=require('mongoose');
 
-const courseSchema=new mongoose.Schema({
-    coursename:{
+const courseContentSchema=new mongoose.Schema({
+    courseid:{
         type:String,
         required:true
     },
-    category:{
+    maintitle:{
         type:String,
         required:true
     },
-    description:{
+    subtitle:{
         type:String,
         required:true
     },
-    teachername:{
+    content:{
         type:String,
         required:true
     },
-    teacherid:{
+    videolink:{
         type:String,
-        required:true
-    },
-    studentid:{
-        type:Array,
         required:false
     },
-
 });
 
-module.exports=mongoose.model('courses',courseSchema);
+module.exports=mongoose.model('coursecontents',courseContentSchema);
