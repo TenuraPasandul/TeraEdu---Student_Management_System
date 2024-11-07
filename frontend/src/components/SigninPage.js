@@ -72,7 +72,7 @@ const LoginForm = ({ flip, onToggleFlip }) => (
     <div className={`formbg-outer ${flip ? 'flip-active' : ''}`}>
       <div className="formbg">
         <div className="form-inner">
-          {/* Sign Up Form */}
+          
           {flip ? (
             <>
             <span className='flip-form'>
@@ -104,7 +104,7 @@ const LoginForm = ({ flip, onToggleFlip }) => (
               </span>
             </>
           ) : (
-            // Sign In Form
+            
             <>
               <span className="padding-bottom--15">Sign in to your account</span>
               <form id="signin-form">

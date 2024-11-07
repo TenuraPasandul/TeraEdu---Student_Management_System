@@ -1,4 +1,3 @@
-// CourseDetails.js
 import React, { useEffect, useState } from 'react';
 import Badge from 'react-bootstrap/Badge';
 import ProgressBar from 'react-bootstrap/ProgressBar';
@@ -6,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import '../css/style.css';
 import NavbarCompo from './NavbarCompo';
-import Collapsed from './Collapsed';  // Import Collapsed component
+import Collapsed from './Collapsed'; 
 import PageFooter from './PageFooter';
 
 export default function CourseDetails() {
@@ -27,12 +26,12 @@ export default function CourseDetails() {
 
   return (
     <div style={{ display: 'flex' }}>
-      <Collapsed /> {/* Sidebar Component */}
-      <div style={{ marginLeft: '240px', width: '100%' }}> {/* Adjusts width and spacing for content */}
+      <Collapsed /> 
+      <div style={{ marginLeft: '240px', width: '100%' }}> 
         <NavbarCompo />
         <br /><br />
         
-        {/* Scroll Progress Bar */}
+        
         <ProgressBar 
           now={scrollProgress} 
           variant="info"
@@ -51,7 +50,7 @@ export default function CourseDetails() {
           <Badge bg="secondary" style={{ fontSize: '15px' }}>Information Technology</Badge>
         </h2>
 
-        {/* Centered Paragraph */}
+        
         <div style={{ height: '8vh' }}></div>
         <div className="container">
           <p className="courseDetails-Para">
